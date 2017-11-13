@@ -14,3 +14,18 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function($app)){
+	$app->post('login/','UsersController@authenticate');
+
+	$app->group(['prefix' => 'cantina'], function($app)){
+		$app->get('produtos/','ProductsController@get');
+		$app->put('produto/','ProductsController@store');
+		$app->delete('produto/{id}/','ProductsController@delete');
+		$app->post('produto/{id}/','ProductsController@update');
+	}
+
+	$app->group(['prefix' => 'resp'], function($app)){
+		//$app->
+	}
+}
