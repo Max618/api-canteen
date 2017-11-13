@@ -8,7 +8,7 @@ class Request extends Model
 {
 
     protected $fillable = [
-        'type','f_price','list'
+        'type','f_price','list','delivered'
     ];
 
     public function parent(){

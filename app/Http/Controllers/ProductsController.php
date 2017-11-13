@@ -32,7 +32,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function get(Request $request,Product $product){
+    public function get(Product $product){
         if($product && !empty($product)){
             return response()->json(['status'=>'success', 'product'=>$product]);
         }
@@ -41,7 +41,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function index(Request $request){
+    public function index(){
         if($products = Product::all()){
             return response()->json(['status' =>'success','products'=>$products]);
         }
@@ -50,7 +50,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function delete(Request $request, Product $product){
+    public function delete(Product $product){
         if($product->delete()){
             return response()->json(['status' => 'success']);
         }

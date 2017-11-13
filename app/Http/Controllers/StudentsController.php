@@ -30,7 +30,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function get(Request $request,Student $student){
+    public function get(Student $student){
         if($student && !empty($student)){
             return response()->json(['status'=>'success', 'student'=>$student]);
         }
@@ -39,7 +39,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function index(Request $request){
+    public function index(){
         if($students = Student::where('parent_id', $this->user->id)){
             return response()->json(['status' =>'success','students'=>$students]);
         }
@@ -48,7 +48,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function delete(Request $request, Student $student){
+    public function delete(Student $student){
         if($student->delete()){
             return response()->json(['status' => 'success']);
         }

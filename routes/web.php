@@ -24,6 +24,7 @@ $router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], fu
 		$app->delete('produto/{product}/','ProductsController@delete');
 		$app->post('produto/{product}/','ProductsController@update');
 		$app->get('produto/{product}/','ProductsController@get');
+		$app->get('/pedidos/today/','RequestsController@getRequests');
 	}
 
 	$app->group(['prefix' => 'resp'], function($app)){

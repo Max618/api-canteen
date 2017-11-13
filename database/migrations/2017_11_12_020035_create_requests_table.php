@@ -21,6 +21,7 @@ class CreateRequestsTable extends Migration
             $table->float('f_price');
             $table->date('delivery_date');
             $table->smallInteger('type');
+            $table->boolean('delivered');
             $table->timestamps();
             $table->foreign('parent_id')
             ->references('id')
