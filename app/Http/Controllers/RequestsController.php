@@ -69,7 +69,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function update(Request $reques, Student $student){
+    public function update(Request $request, Pedido $pedido){
         $this->validade($request, [
             'list' => 'required',
             'f_price' => 'required',
@@ -77,11 +77,20 @@ class ProductssController extends Controller
             'type' => 'required',
             'delivered' => 'required'
         ]);
-        if($student->fill($request->all()->save()){
+        if($pedido->fill($request->all()->save()){
             return response()->json(['status' => 'success']);
         }
         else{
-            return response()->json(['status'=>'fail','message'=>'unkown student']);
+            return response()->json(['status'=>'fail','message'=>'unkown request']);
+        }
+    }
+
+    public function myRequest(){
+        if($pedidos = Pedido::where('parent_id',$this->user->id)){
+            return response()->json(['status' => 'success','requests' => $pedidos]);
+        }
+        else{
+            return response()->json(['status'=>'fail']);
         }
     }
 }

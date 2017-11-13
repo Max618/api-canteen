@@ -57,7 +57,7 @@ class ProductssController extends Controller
         }
     }
 
-    public function update(Request $reques, Student $student){
+    public function update(Request $request, Student $student){
         $this->validade($request, [
             'name' => 'required',
             'class' => 'required'
