@@ -23,7 +23,12 @@ class ProductssController extends Controller
             'type' => 'required',
             'amount' => 'required'
         ]);
-        
+        if($this->user->product()->Create($request->all())){
+            return response()->json(['status'=>'success']);
+        }
+        else{
+            return response()->json(['status'=>'fail']);
+        }
     }
 }    
 
