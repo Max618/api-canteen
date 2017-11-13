@@ -66,7 +66,7 @@ class ProductssController extends Controller
             'type' => 'required',
             'amount' => 'required'
         ]);
-        if(product->fill($request->all()->save()){
+        if($product->fill($request->all()->save()){
             return response()->json(['status' => 'success']);
         }
         else{

@@ -27,6 +27,10 @@ $router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], fu
 	}
 
 	$app->group(['prefix' => 'resp'], function($app)){
-		//$app->
+		$app->get('filhos/','ProductsController@index');
+		$app->put('filho/','ProductsController@store');
+		$app->delete('filho/{student}/','ProductsController@delete');
+		$app->post('filho/{student}/','ProductsController@update');
+		$app->get('filho/{student}/','ProductsController@get');
 	}
 }
