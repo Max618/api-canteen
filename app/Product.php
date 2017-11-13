@@ -11,4 +11,8 @@ class Procuct extends Model
         'name','price','type','amount'
     ];
 
+    public function cook(){
+        return $this->belongsTo('App\Cook');
+    }
+
 }

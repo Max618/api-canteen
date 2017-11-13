@@ -12,4 +12,16 @@ class Responsable extends Model
         'name','phone'
     ];
 
+    public function request(){
+        return $this->hasMany('App\Request');
+    }
+
+    public function student(){
+        return $this->hasMany('App\Student');
+    }
+
+    public function user(){
+        return $this->hasOne('App\User');
+    }
+
 }

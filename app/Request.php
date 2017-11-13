@@ -11,4 +11,12 @@ class Request extends Model
         'type','f_price','list'
     ];
 
+    public function parent(){
+        return $this->belongsTo('App\Responsable');
+    }
+
+    public function student(){
+        return $this->belongsTo('App\Student');
+    }
+
 }

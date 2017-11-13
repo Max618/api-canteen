@@ -29,4 +29,12 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     protected $hidden = [
         'password',
     ];
+
+    public function cook(){
+        return $this->hasOne('App\Cook');
+    }
+
+    public function parent(){
+        return $this->hasOne('App\Responsable');
+    }
 }
