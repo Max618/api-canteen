@@ -19,10 +19,11 @@ $router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], fu
 	$app->post('login/','UsersController@authenticate');
 
 	$app->group(['prefix' => 'cantina'], function($app)){
-		$app->get('produtos/','ProductsController@get');
+		$app->get('produtos/','ProductsController@index');
 		$app->put('produto/','ProductsController@store');
-		$app->delete('produto/{id}/','ProductsController@delete');
-		$app->post('produto/{id}/','ProductsController@update');
+		$app->delete('produto/{product}/','ProductsController@delete');
+		$app->post('produto/{product}/','ProductsController@update');
+		$app->get('produto/{product}/','ProductsController@get');
 	}
 
 	$app->group(['prefix' => 'resp'], function($app)){
