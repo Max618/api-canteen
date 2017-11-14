@@ -9,7 +9,7 @@ use App\Users;
 use Auth;
 use Carbon\Carbon;
 
-class ProductssController extends Controller
+class RequestsController extends Controller
 {
 	private $user;
 

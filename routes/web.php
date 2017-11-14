@@ -15,10 +15,10 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function($app)){
+$router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function($app){
 	$app->post('login/','UsersController@authenticate');
 
-	$app->group(['prefix' => 'cantina'], function($app)){
+	$app->group(['prefix' => 'cantina'], function($app){
 		$app->get('produtos/','ProductsController@index');
 		$app->put('produto/','ProductsController@store');
 		$app->delete('produto/{product}/','ProductsController@delete');
@@ -29,9 +29,9 @@ $router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], fu
 		$app->get('pedidos/','RequestsController@index');
 		$app->post('pedido/{request}/','RequestsController@update');
 		$app->get('pedido/{request}/','RequestsController@get');
-	}
+	});
 
-	$app->group(['prefix' => 'resp'], function($app)){
+	$app->group(['prefix' => 'resp'], function($app){
 		$app->get('filhos/','ProductsController@index');
 		$app->put('filho/','ProductsController@store');
 		$app->delete('filho/{student}/','ProductsController@delete');
@@ -43,5 +43,5 @@ $router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], fu
 		$app->put('pedido/','RequestsController@store');
 		$app->delete('pedido/{request}/','RequestsController@delete');
 		$app->get('meuspedido/','RequestsController@myRequest');
-	}
-}
+	});
+});

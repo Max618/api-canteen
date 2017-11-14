@@ -21,7 +21,7 @@ class CreateCooksTable extends Migration
             ->references('id')
             ->on('users')
             ->onUpdate('cascade')
-            ->onDelete('set null');
+            ->onDelete('cascade');
         });
     }
 

@@ -15,8 +15,8 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('parent_id');
-            $table->integer('student_id');
+            $table->integer('parent_id')->unsigned();
+            $table->integer('student_id')->unsigned();
             $table->string('list',500);
             $table->float('f_price');
             $table->date('delivery_date');
@@ -25,14 +25,14 @@ class CreateRequestsTable extends Migration
             $table->timestamps();
             $table->foreign('parent_id')
             ->references('id')
-            ->on('parents')
+            ->on('users')
             ->onUpdate('cascade')
-            ->onDelete('set null');
+            ->onDelete('cascade');
             $table->foreign('student_id')
             ->references('id')
             ->on('students')
             ->onUpdate('cascade')
-            ->onDelete('set null');
+            ->onDelete('cascade');
         });
     }
 

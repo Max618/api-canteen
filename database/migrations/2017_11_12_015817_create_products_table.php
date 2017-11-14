@@ -19,13 +19,13 @@ class CreateProductsTable extends Migration
             $table->integer('amount');
             $table->float('price');
             $table->integer('type');
-            $table->integer('cook_id');
+            $table->integer('cook_id')->unsigned();
             $table->timestamps();
             $table->foreign('cook_id')
             ->references('id')
             ->on('cooks')
             ->onUpdate('cascade')
-            ->onDelete('set null');
+            ->onDelete('cascade');
         });
     }
 

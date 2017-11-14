@@ -8,7 +8,7 @@ use App\Product;
 use App\Users;
 use Auth;
 
-class ProductssController extends Controller
+class ProductsController extends Controller
 {
     private $user;
 

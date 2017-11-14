@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStudentTable extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,11 +19,6 @@ class CreateStudentTable extends Migration
             $table->string('class');
             $table->integer('parent_id');
             $table->timestamps();
-            $table->foreign('parent_id')
-            ->references('id')
-            ->on('parents')
-            ->onUpdate('cascade')
-            ->onDelete('set null');
         });
     }
 
@@ -34,6 +29,6 @@ class CreateStudentTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('student');
+        Schema::dropIfExists('students');
     }
 }
