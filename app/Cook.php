@@ -11,10 +11,10 @@ class Cook extends Model
     ];
 
     public function user(){
-        return $this->hasOne('App\User');
+        return $this->hasOne('App\User','id');
     }
 
     public function product(){
-        return $this->hasMany('App\Product');
+        return $this->hasMany('App\Product', 'cook_id');
     }
 }

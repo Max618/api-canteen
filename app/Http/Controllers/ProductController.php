@@ -4,25 +4,29 @@ namespace App\Http\Controllers;
  
 use Illuminate\Http\Request;
 use App\Product;
-use Auth;
+use App\User;
+use App\Cook;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Firebase\JWT\JWT;
  
 class ProductController extends Controller
 {
     private $user;
 
-    public function __contruct(){
+    public function __construct(Request $request){
         //$this->middleware('auth',['only' => 'index']);
-        $this->user = Auth::user();
+        $this->user = User::find(JWT::decode($request->header('Api-Key'), env('JWT_SECRET'), ['HS256'])->sub);
     }
 
     public function store(Request $request){
-        $this->validade($request, [
+        $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
             'type' => 'required',
             'amount' => 'required'
         ]);
-        if($this->user->cook()->product()->Create($request->all())){
+        $cook = Cook::find($this->user->id);
+        if($cook->product()->create($request->all())){
             return response()->json(['status'=>'success']);
         }
         else{
@@ -30,7 +34,8 @@ class ProductController extends Controller
         }
     }
 
-    public function get(Product $product){
+    public function get($product){
+        $product = Product::find($product);
         if($product && !empty($product)){
             return response()->json(['status'=>'success', 'product'=>$product]);
         }
@@ -48,7 +53,8 @@ class ProductController extends Controller
         }
     }
 
-    public function delete(Product $product){
+    public function delete($product){
+        $product = Product::find($product);
         if($product->delete()){
             return response()->json(['status' => 'success']);
         }
@@ -57,14 +63,15 @@ class ProductController extends Controller
         }
     }
 
-    public function update(Request $request, Product $product){
-        $this->validade($request, [
+    public function update(Request $request, $product){
+        $this->validate($request, [
             'name' => 'required',
             'price' => 'required',
             'type' => 'required',
             'amount' => 'required'
         ]);
-        if($product->fill($request->all()->save())){
+        $product = Product::find($product);
+        if($product->fill($request->all())->save()){
             return response()->json(['status' => 'success']);
         }
         else{
