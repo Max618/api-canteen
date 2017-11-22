@@ -23,11 +23,7 @@ $app = new Laravel\Lumen\Application(
     realpath(__DIR__.'/../')
 );
 
-$app->withFacades(true, [
-    Tymon\JWTAuth\Facades\JWTAuth::class => 'JWTAuth',
-    Tymon\JWTAuth\Facades\JWTFactory::class => 'JWTFactory'
-]);
-
+$app->withFacades();
 $app->withEloquent();
 
 /*
@@ -62,9 +58,9 @@ $app->singleton(
 |
 */
 
-$app->middleware([
+/*$app->middleware([
     App\Http\Middleware\ExampleMiddleware::class
-]);
+]);*/
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,

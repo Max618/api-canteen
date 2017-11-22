@@ -16,18 +16,20 @@ $router->get('/', function () use ($router) {
 });
 
 $router->group(['prefix' => '/api/v1'], function($app){
-	$app->post('login/','AuthController@login');
-	$app->post('register/parent/','AuthController@registerParent');
-	/*$app->get('register/parent/', function (){
-		return "eoq";
-	});*/
+	$app->group(['prefix' => 'auth'], function($app){
+		$app->post('login/','AuthController@login');
+		$app->post('register/parent/','AuthController@registerParent');
+		$app->post('register/cook/','AuthController@registerCook');
+		$app->post('logut/','AuthController@login');
+	});
 
-	$app->group(['prefix' => 'cantina'], function($app){
-		$app->get('produtos/','ProductsController@index');
-		$app->put('produto/','ProductsController@store');
-		$app->delete('produto/{product}/','ProductsController@delete');
-		$app->post('produto/{product}/','ProductsController@update');
-		$app->get('produto/{product}/','ProductsController@get');
+
+	$app->group(['prefix' => 'cantina','middleware' => 'auth'], function($app){
+		$app->get('produtos/','ProductController@index');
+		$app->put('produto/','ProductController@store');
+		$app->delete('produto/{product}/','ProductController@delete');
+		$app->post('produto/{product}/','ProductController@update');
+		$app->get('produto/{product}/','ProductController@get');
 
 		$app->get('/pedidos/today/','RequestsController@getRequests');
 		$app->get('pedidos/','RequestsController@index');
@@ -35,7 +37,7 @@ $router->group(['prefix' => '/api/v1'], function($app){
 		$app->get('pedido/{request}/','RequestsController@get');
 	});
 
-	$app->group(['prefix' => 'resp'], function($app){
+	$app->group(['prefix' => 'resp','middleware' => 'auth'], function($app){
 		$app->get('filhos/','ProductsController@index');
 		$app->put('filho/','ProductsController@store');
 		$app->delete('filho/{student}/','ProductsController@delete');

@@ -8,7 +8,7 @@ use App\Student;
 use App\Users;
 use Auth;
 
-class ProductssController extends Controller
+class StudentController extends Controller
 {
 	private $user;
 
@@ -62,7 +62,7 @@ class ProductssController extends Controller
             'name' => 'required',
             'class' => 'required'
         ]);
-        if($student->fill($request->all()->save()){
+        if($student->fill($request->all()->save())){
             return response()->json(['status' => 'success']);
         }
         else{

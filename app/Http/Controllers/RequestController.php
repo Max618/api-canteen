@@ -9,7 +9,7 @@ use App\Users;
 use Auth;
 use Carbon\Carbon;
 
-class RequestsController extends Controller
+class RequestController extends Controller
 {
 	private $user;
 
@@ -77,7 +77,7 @@ class RequestsController extends Controller
             'type' => 'required',
             'delivered' => 'required'
         ]);
-        if($pedido->fill($request->all()->save()){
+        if($pedido->fill($request->all()->save())){
             return response()->json(['status' => 'success']);
         }
         else{

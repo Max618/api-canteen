@@ -1,19 +1,17 @@
-<?php
+<?php 
 
 namespace App\Http\Controllers;
-
-use App\Http\Controllers\Controller;
+ 
 use Illuminate\Http\Request;
 use App\Product;
-use App\Users;
 use Auth;
-
-class ProductsController extends Controller
+ 
+class ProductController extends Controller
 {
     private $user;
 
     public function __contruct(){
-        $this->middleware('auth');
+        //$this->middleware('auth',['only' => 'index']);
         $this->user = Auth::user();
     }
 
@@ -66,13 +64,11 @@ class ProductsController extends Controller
             'type' => 'required',
             'amount' => 'required'
         ]);
-        if($product->fill($request->all()->save()){
+        if($product->fill($request->all()->save())){
             return response()->json(['status' => 'success']);
         }
         else{
             return response()->json(['status'=>'fail','message'=>'unkown product']);
         }
     }
-}    
-
-?>
+}
