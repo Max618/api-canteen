@@ -15,8 +15,12 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => '/api/v1','namespace' => 'App\Http\Controllers'], function($app){
-	$app->post('login/','UsersController@authenticate');
+$router->group(['prefix' => '/api/v1'], function($app){
+	$app->post('login/','AuthController@login');
+	$app->post('register/parent/','AuthController@registerParent');
+	/*$app->get('register/parent/', function (){
+		return "eoq";
+	});*/
 
 	$app->group(['prefix' => 'cantina'], function($app){
 		$app->get('produtos/','ProductsController@index');
