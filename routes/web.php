@@ -20,7 +20,7 @@ $router->group(['prefix' => '/api/v1'], function($app){
 		$app->post('login/','AuthController@login');
 		$app->post('register/parent/','AuthController@registerParent');
 		$app->post('register/cook/','AuthController@registerCook');
-		$app->post('logut/','AuthController@login');
+		$app->post('logout/','AuthController@logout');
 	});
 
 

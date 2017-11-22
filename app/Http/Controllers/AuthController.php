@@ -103,4 +103,11 @@ class AuthController extends Controller {
 
 	}
 
+	public function logout(Request $request){
+		$user = User::where('api-key', $request->header('Api-Key'))->first();
+		$user['api-key'] = NULL;
+		$user->save();
+		return response()->json(['status' => 'loged user']);
+	}
+
 }
