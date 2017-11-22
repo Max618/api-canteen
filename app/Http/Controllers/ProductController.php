@@ -14,7 +14,7 @@ class ProductController extends Controller
     private $user;
 
     public function __construct(Request $request){
-        //$this->middleware('auth',['only' => 'index']);
+        $this->middleware('cook',['except'=>['index','get']]);
         $this->user = User::find(JWT::decode($request->header('Api-Key'), env('JWT_SECRET'), ['HS256'])->sub);
     }
 

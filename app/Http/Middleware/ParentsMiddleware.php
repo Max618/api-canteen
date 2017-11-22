@@ -2,9 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Responsable as Parents;
 use Closure;
 
-class ExampleMiddleware
+class ParentsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -15,6 +16,9 @@ class ExampleMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if(!Parent::find($request->auth->id)){
+            return response()->json(['error'=>'user is not a parent'],401);
+        }
         return $next($request);
     }
 }

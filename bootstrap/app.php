@@ -64,6 +64,8 @@ $app->singleton(
 
 $app->routeMiddleware([
     'auth' => App\Http\Middleware\Authenticate::class,
+    'cook' => App\Http\Middleware\CooksMiddleware::class,
+    'parent' => App\Http\Middleware\ParentsMiddleware::class,
 ]);
 
 /*

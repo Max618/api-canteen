@@ -77,7 +77,7 @@ class RequestController extends Controller
             'type' => 'required',
             'delivered' => 'required'
         ]);
-        if($pedido->fill($request->all()->save())){
+        if($pedido->fill($request->all())->save()){
             return response()->json(['status' => 'success']);
         }
         else{
