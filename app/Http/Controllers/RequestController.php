@@ -5,27 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Request as Pedido;
-use App\Users;
-use Auth;
+use App\User;
+use App\Responsable;
 use Carbon\Carbon;
+use Firebase\JWT\JWT;
 
 class RequestController extends Controller
 {
 	private $user;
 
-    public function __contruct(){
-        $this->middleware('auth');
-        $this->user = Auth::user();
+    public function __construct(Request $request){
+        //$this->middleware('cook',['except'=>['index','get']]);
+        $this->user = User::find(JWT::decode($request->header('Api-Key'), env('JWT_SECRET'), ['HS256'])->sub);
     }
 
+
     public function store(Request $request){
-        $this->validade($request, [
+        $this->validate($request, [
             'list' => 'required',
             'f_price' => 'required',
             'delivery_date' => 'required',
-            'type' => 'required'
+            'type' => 'required',
+            'student_id' => 'required'
         ]);
-        if($this->user->parent()->request()->Create($request->all())){
+        $parent = Responsable::find($this->user->id);
+        if($parent->request()->create($request->all())){
             return response()->json(['status'=>'success']);
         }
         else{
@@ -70,7 +74,7 @@ class RequestController extends Controller
     }
 
     public function update(Request $request, Pedido $pedido){
-        $this->validade($request, [
+        $this->validate($request, [
             'list' => 'required',
             'f_price' => 'required',
             'delivery_date' => 'required',

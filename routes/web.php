@@ -48,10 +48,10 @@ $router->group(['prefix' => '/api/v1'], function($app){
 		$app->post('filho/{student}/','StudentController@update');
 		$app->get('filho/{student}/','StudentController@get');
 
-		$app->post('pedido/{request}/','RequestsController@update');
-		$app->get('pedido/{request}/','RequestsController@get');
-		$app->put('pedido/','RequestsController@store');
-		$app->delete('pedido/{request}/','RequestsController@delete');
-		$app->get('meuspedido/','RequestsController@myRequest');
+		$app->post('pedido/{request}/','RequestController@update');
+		$app->get('pedido/{request}/','RequestController@get');
+		$app->put('pedido/','RequestController@store');
+		$app->delete('pedido/{request}/','RequestController@delete');
+		$app->get('meuspedido/','RequestController@myRequest');
 	});
 });
