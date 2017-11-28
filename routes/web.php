@@ -42,11 +42,11 @@ $router->group(['prefix' => '/api/v1'], function($app){
 	});
 
 	$app->group(['prefix' => 'resp','middleware' => 'auth'], function($app){
-		$app->get('filhos/','ProductsController@index');
-		$app->put('filho/','ProductsController@store');
-		$app->delete('filho/{student}/','ProductsController@delete');
-		$app->post('filho/{student}/','ProductsController@update');
-		$app->get('filho/{student}/','ProductsController@get');
+		$app->get('filhos/','StudentController@index');
+		$app->put('filho/','StudentController@store');
+		$app->delete('filho/{student}/','StudentController@delete');
+		$app->post('filho/{student}/','StudentController@update');
+		$app->get('filho/{student}/','StudentController@get');
 
 		$app->post('pedido/{request}/','RequestsController@update');
 		$app->get('pedido/{request}/','RequestsController@get');

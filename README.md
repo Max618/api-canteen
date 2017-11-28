@@ -227,3 +227,136 @@ Headers
 Status
 
 	200
+
+
+
+
+
+
+
+
+## Responsável
+
+### **GET** -> /api/v1/resp/filhos
+
+Método para pegar todos os os filhos do responsável
+
+#### Request
+Headers
+
+	Accept: application/json
+	Api-Key: {apikey}
+
+#### Response
+Array com todos os filhos
+
+Exemplo:
+
+	{
+	    "status": "success",
+	    "students": [
+	        {
+	            "id": 1,
+	            "name": "Aluno 1",
+	            "class": "Turma 1",
+	            "parent_id": 1,
+	            "created_at": "2017-11-28 20:23:56",
+	            "updated_at": "2017-11-28 20:23:56"
+	        },
+	        {
+	            "id": 3,
+	            "name": "Aluno 2",
+	            "class": "Turma 1",
+	            "parent_id": 1,
+	            "created_at": "2017-11-28 20:29:58",
+	            "updated_at": "2017-11-28 20:29:58"
+	        }
+	    ]
+	}
+
+Status
+
+	200
+
+
+### **PUT** -> /api/v1/resp/filho
+
+Método para cadastrar um novo filho
+
+#### Request
+Headers
+
+	Accept: application/json
+	Api-Key: {apikey}
+
+Form
+
+	name: {string}
+	class: {string}
+
+
+#### Response
+Status
+
+	200
+
+### **GET** -> /api/v1/resp/filho/{id}
+
+Método para pegar somente um filho
+
+#### Request
+Headers
+
+	Accept: application/json
+	Api-Key: {apikey}
+
+#### Response
+Array com produto
+
+Exemplo:
+
+	{
+	    "status": "success",
+	    "student": {
+	        "id": 1,
+	        "name": "Aluno 1",
+	        "class": "Turma 1",
+	        "parent_id": 1,
+	        "created_at": "2017-11-28 20:23:56",
+	        "updated_at": "2017-11-28 20:23:56"
+	    }
+	}
+
+Status
+
+	200
+
+### **POST** -> /api/v1/resp/filho/{id}
+
+Método para atualizar um filho
+
+#### Request
+Headers
+
+	Accept: application/json
+	Api-Key: {apikey}
+
+#### Response
+Status
+
+	200
+
+### **DELETE** -> /api/v1/resp/filho/{id}
+
+Método para deletar um filho
+
+#### Request
+Headers
+
+	Accept: application/json
+	Api-Key: {apikey}
+
+#### Response
+Status
+
+	200

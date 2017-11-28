@@ -17,7 +17,7 @@ class Responsable extends Model
     }
 
     public function student(){
-        return $this->hasMany('App\Student');
+        return $this->hasMany('App\Student','parent_id');
     }
 
     public function user(){

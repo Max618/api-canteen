@@ -5,24 +5,27 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Student;
-use App\Users;
-use Auth;
+use App\User;
+use App\Responsable;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Firebase\JWT\JWT;
 
 class StudentController extends Controller
 {
 	private $user;
 
-    public function __contruct(){
-        $this->middleware('auth');
-        $this->user = Auth::user();
+    public function __construct(Request $request){
+        //$this->middleware('cook',['except'=>['index','get']]);
+        $this->user = User::find(JWT::decode($request->header('Api-Key'), env('JWT_SECRET'), ['HS256'])->sub);
     }
 
     public function store(Request $request){
-        $this->validade($request, [
+        $this->validate($request, [
             'name' => 'required',
             'class' => 'required'
         ]);
-        if($this->user->parent()->student()->Create($request->all())){
+        $parent = Responsable::find($this->user->id);
+        if($parent->student()->create($request->all())){
             return response()->json(['status'=>'success']);
         }
         else{
@@ -30,7 +33,8 @@ class StudentController extends Controller
         }
     }
 
-    public function get(Student $student){
+    public function get($student){
+        $student = Student::find($student);
         if($student && !empty($student)){
             return response()->json(['status'=>'success', 'student'=>$student]);
         }
@@ -40,7 +44,8 @@ class StudentController extends Controller
     }
 
     public function index(){
-        if($students = Student::where('parent_id', $this->user->id)){
+        $parent = Responsable::find($this->user->id);
+        if($students = $parent->student()->get()){
             return response()->json(['status' =>'success','students'=>$students]);
         }
         else{
@@ -48,7 +53,8 @@ class StudentController extends Controller
         }
     }
 
-    public function delete(Student $student){
+    public function delete($student){
+        $student = Student::find($student);
         if($student->delete()){
             return response()->json(['status' => 'success']);
         }
@@ -57,11 +63,12 @@ class StudentController extends Controller
         }
     }
 
-    public function update(Request $request, Student $student){
-        $this->validade($request, [
+    public function update(Request $request, $student){
+        $this->validate($request, [
             'name' => 'required',
             'class' => 'required'
         ]);
+        $student = Student::find($student);
         if($student->fill($request->all())->save()){
             return response()->json(['status' => 'success']);
         }
