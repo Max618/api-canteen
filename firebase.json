@@ -1,5 +1,6 @@
 {
-    "hosting": {
-    "public": "public"
-    }
+  "hosting": {
+    "public": "public/",
+    "source": "public/index.php"
+  }
 }
